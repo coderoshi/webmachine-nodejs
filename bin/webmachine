@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+var log = console.log,
+    coffee = require('iced-coffee-script'),
+    argv = require('optimist').argv,
+    webmachine = require('../lib/webmachine');
+
+function logUsage() {
+  log('Usage:');
+  log('  webmachine file.js\n');
+  log('Options:');
+  log('    --port port     [default 3000]');
+  // log('    --ipaddr ipaddr [default 0.0.0.0]');
+  // return log('    --log log       [default none]');
+};
+
+webmachine.start((argv.port || 3000), (argv.ipaddr || '127.0.0.1'));
+
+// if (argv._.length > 0) {
+//   if (argv._[0] === 'new') {
+//     if (argv._.length === 1) {
+//       logUsage();
+//     } else {
+//       systatic.clone(argv._[1], 'basic');
+//     }
+//     process.exit(0);
+//   }
+// }
+
+// if (argv.help || argv.h) {
+//   logUsage();
+//   process.exit(0);
+// }
+
+// if (!systatic.inProject('.')) {
+//   logUsage();
+//   process.exit(0);
+// }
+
+// var port = argv.port || 3000,
+//     ipaddr = argv.ipaddr || '0.0.0.0',
+//     logfile = argv.log;
+
+// if (argv._.length > 0) {
+//   var phase = argv._[0];
+//   if (argv._[0] === 'test') {
+//     systatic.test(port, ipaddr, logfile);
+//   }
+//   else if (argv._[0] === 'phases') {
+//     systatic.printPhases();
+//   }
+//   else {
+//     systatic.runToPhase(phase);
+//   }
+// } else {
+//   systatic.startServer(port, ipaddr, logfile);
+// }

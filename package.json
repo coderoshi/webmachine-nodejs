@@ -1,0 +1,36 @@
+{
+  "author": "Eric Redmond <eric.redmond@gmail.com>",
+  "name": "webmachine",
+  "description": "Webmachine Application Server",
+  "version": "0.0.1",
+  "preferGlobal": "true",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/coderoshi/webmachine-nodejs.git"
+  },
+  "keywords": ["webmachine", "http", "webserver", "appserver"],
+  "license" : "MIT/X11",
+  "main": "./lib/webmachine.iced",
+  "engines": {
+    "node": "~>0.6.0"
+  },
+  "dependencies": {
+    "iced-coffee-script" : "~>1.3.3a",
+    "optimist"        : "~>0.2.0",
+    "underscore"      : "~>1.3.1"
+  },
+  "devDependencies": {
+    "vows": ">=0.5.0"
+  },
+  "directories": {
+    "test": "./test",
+    "lib":  "./lib",
+    "bin":  "./bin"
+  },
+  "scripts": {
+    "test": "vows --spec"
+  },
+  "bin": {
+    "webmachine": "./bin/webmachine"
+  }
+}
