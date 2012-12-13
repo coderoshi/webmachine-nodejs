@@ -58,25 +58,6 @@ class Webmachine
 
         fsm = new Fsm(resource, rd, rs)
         fsm.run()
-
-        # req.on 'data', (c)->
-        #   console.log(""+c)
-        # req.on 'end', (c)->
-        #   console.log("END")
-        #   # next(false)
-
-        # resource.service_available(rd, rs, (reply)->
-        #   if reply == false
-        #     res.writeHead(200, {'Content-Type': 'text/plain'})
-        #     # console.log(res)
-
-        #     res.write('resource.service_available()')
-        #     res.end()
-        #   else
-        #     # continue...
-        #     res.end()
-        # )
-
       else
         res.writeHead(404, {'Content-Type': 'text/plain'})
         res.write('File Not Found')

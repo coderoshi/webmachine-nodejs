@@ -12,6 +12,9 @@ class ResData
   get_resp_header: (string)->
     @res.getHeader(string)
 
+  statusCode: ()->
+    @res.statusCode
+
   # -> bool() the last value passed to do_redirect, false otherwise – if true,
   # then some responses will be 303 instead of 2xx where applicable
   resp_redirect: ()->

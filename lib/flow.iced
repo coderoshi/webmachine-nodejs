@@ -90,7 +90,7 @@ class Flow
     _.union(accept, accept_encoding, accept_charset, @resource.variances_sync(req, res))
 
   unquote_header: (header)->
-    header.replace(/^"(.*?)"$/, '$1')
+    header && header.replace(/^"(.*?)"$/, '$1')
 
   convert_request_date: (date_str)->
     return null if date_str == null || date_str == ''
