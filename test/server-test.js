@@ -30,6 +30,7 @@ vows.describe('Server').addBatch({
     },
     'and service is not available': function (err, req, res, next) {
       assert.notEqual(err, 'timeout');
+      assert.notEqual(next, undefined);
       next(false);
       assert.equal(res.statusCode(), 503);
       wm.server.close()

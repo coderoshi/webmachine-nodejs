@@ -84,7 +84,7 @@ class Flow
     null
 
   variances: (req, res)->
-    accept = if @resource.content_types_provided(req, res).length > 1 then ["Accept"] else []
+    accept = if @resource.content_types_provided_sync(req, res).length > 1 then ["Accept"] else []
     accept_encoding = if @resource.encodings_provided_sync(req, res).length > 1 then ["Accept-Encoding"] else []
     accept_charset = if @resource.charsets_provided_sync(req, res).length > 1 then ["Accept-Charset"] else []
     _.union(accept, accept_encoding, accept_charset, @resource.variances_sync(req, res))
@@ -113,7 +113,7 @@ class Flow
   v3b12: (req, res) ->
     @decision_test(
       (req, res, next) =>
-        next(_.contains(@resource.known_methods, req.method))
+        next(_.contains(@resource.known_methods_sync(req, res), req.method))
     , req, res, true, 'v3b11', 501)
 
   # "URI too long?"
@@ -195,8 +195,8 @@ class Flow
     @decision_test(
       (req, res, next)=>
         unless accept = @get_header_val(req, 'accept')
-          # TODO:  = MediaType.parse(@resource.content_types_provided()[0][0])
-          @metadata['Content-Type'] = _.first(_.keys(@resource.content_types_provided()))
+          # TODO:  = MediaType.parse(@resource.content_types_provided_sync()[0][0])
+          @metadata['Content-Type'] = _.first(_.keys(@resource.content_types_provided_sync()))
           next('v3d4')
         else
           next('v3c4')
@@ -206,7 +206,7 @@ class Flow
   v3c4: (req, res) ->
     @decision_test(
       (req, res, next)=>
-        types = _.keys(@resource.content_types_provided())
+        types = _.keys(@resource.content_types_provided_sync())
         chosen_type = @choose_media_type(types, @get_header_val(req, 'accept'))
         unless chosen_type
           next(406)
@@ -516,7 +516,7 @@ class Flow
             res.header["Expires"] = new Date(expires) if expires
             # httpd_util:rfc1123_date(calendar:universal_time_to_local_time(Exp))})
         
-            @resource.content_types_provided req, res, (content_types_provided) =>
+            @resource.content_types_provided_sync req, res, (content_types_provided) =>
 
               content_types = _.pairs(content_types_provided)
               content_type = @metadata['Content-Type']
@@ -566,7 +566,7 @@ class Flow
     # {MT, MParams} = webmachine_util:media_type_to_detail(CT),
     # wrcall({set_metadata, 'mediaparams', MParams}),
     # case [Fun || {Type,Fun} <-
-    #                  resource_call(content_types_accepted), MT =:= Type] of
+    #                  resource_call(content_types_accepted_sync), MT =:= Type] of
     #     [] -> {respond,415};
     #     AcceptedContentList ->
     #         F = hd(AcceptedContentList),

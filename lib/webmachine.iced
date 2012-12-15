@@ -33,14 +33,14 @@ class Webmachine
 
         # TODO: wrap resource inside a Resource
         resource.authorization = {}
-        resource.known_methods = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT', 'OPTIONS']
+        resource.known_methods_sync ||= (req, res) -> ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT', 'OPTIONS']
         resource.allowed_methods_sync ||= (req, res) -> ['GET', 'HEAD']
         resource.charsets_provided_sync ||= (req, res) -> {"iso-8859-1" : (x) -> x}
         resource.encodings_provided_sync ||= (req, res) -> {"identity" : (x) -> x}
+        resource.content_types_provided_sync ||= (req, res) -> {"text/html" : 'to_html'}
+        resource.content_types_accepted_sync ||= (req, res) -> []
 
         # TODO: change these to syncs?
-        resource.content_types_provided ||= (req, res) -> {"text/html" : 'to_html'}
-        resource.content_types_accepted ||= (req, res) -> []
         resource.options ||= (req, res) -> []
         resource.forbidden ||= (req, res, next) -> next(false)
 
