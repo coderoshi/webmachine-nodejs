@@ -1,20 +1,19 @@
-// Thanks, Nodemachine
+// Thanks Nodemachine
 var sys = require('sys');
 
 module.exports = [
   {
     name: "v3b13 false",
-    appConfig: { service_available: false },
+    appConfig: { serviceAvailable: false },
     method: "GET",
     path: "/",
     headers: {},
     checkStatus: 503,
     checkStack: ["v3b13"],
-//    checkBody: null
   },
   {
     name: "v3b13 true",
-    appConfig: { known_methods_sync: ["HEAD", "POST"] },
+    appConfig: { knownMethodsSync: ["HEAD", "POST"] },
     method: "GET",
     path: "/",
     headers: {},
@@ -23,7 +22,7 @@ module.exports = [
   },
   {
     name: "v3b12 false",
-    appConfig: { known_methods_sync: ["HEAD", "POST"] },
+    appConfig: { knownMethodsSync: ["HEAD", "POST"] },
     method: "GET",
     path: "/",
     headers: {},
@@ -32,7 +31,7 @@ module.exports = [
   },
   {
     name: "v3b12 true",
-    appConfig: { known_methods_sync: ["GET", "HEAD", "POST"], uri_too_long: true },
+    appConfig: { knownMethodsSync: ["GET", "HEAD", "POST"], uriTooLong: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -41,7 +40,7 @@ module.exports = [
   },
   {
     name: "v3b11 true",
-    appConfig: { uri_too_long: true },
+    appConfig: { uriTooLong: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -50,7 +49,7 @@ module.exports = [
   },
   {
     name: "v3b11 false",
-    appConfig: { allowed_methods_sync: ["HEAD", "POST"] },
+    appConfig: { allowedMethodsSync: ["HEAD", "POST"] },
     method: "GET",
     path: "/",
     headers: {},
@@ -59,7 +58,7 @@ module.exports = [
   },
   {
     name: "v3b10 false",
-    appConfig: { allowed_methods_sync: ["HEAD", "POST"] },
+    appConfig: { allowedMethodsSync: ["HEAD", "POST"] },
     method: "GET",
     path: "/",
     headers: {},
@@ -68,7 +67,7 @@ module.exports = [
   },
   {
     name: "v3b10 true",
-    appConfig: { allowed_methods_sync: ["GET", "HEAD", "POST"], malformed_request: true },
+    appConfig: { allowedMethodsSync: ["GET", "HEAD", "POST"], malformedRequest: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -77,7 +76,7 @@ module.exports = [
   },
   {
     name: "v3b9 true",
-    appConfig: { malformed_request: true },
+    appConfig: { malformedRequest: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -86,7 +85,7 @@ module.exports = [
   },
   {
     name: "v3b9 false",
-    appConfig: { is_authorized: false, getAuthenticationHeader: "Basic realm=\"Test\"" },
+    appConfig: { isAuthorized: false, getAuthenticationHeader: "Basic realm=\"Test\"" },
     method: "GET",
     path: "/",
     headers: {},
@@ -96,7 +95,7 @@ module.exports = [
   },
   {
     name: "v3b8 false",
-    appConfig: { is_authorized: false, getAuthenticationHeader: "Basic realm=\"Test\"" },
+    appConfig: { isAuthorized: false, getAuthenticationHeader: "Basic realm=\"Test\"" },
     method: "GET",
     path: "/",
     headers: {},
@@ -106,7 +105,7 @@ module.exports = [
   },
   {
     name: "v3b8 true",
-    appConfig: { is_forbidden: true },
+    appConfig: { isForbidden: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -115,7 +114,7 @@ module.exports = [
   },
   {
     name: "v3b7 true",
-    appConfig: { is_forbidden: true },
+    appConfig: { isForbidden: true },
     method: "GET",
     path: "/",
     headers: {},
@@ -124,7 +123,7 @@ module.exports = [
   },
   {
     name: "v3b7 false",
-    appConfig: { valid_content_headers: false },
+    appConfig: { validContentHeaders: false },
     method: "GET",
     path: "/",
     headers: {},
@@ -133,7 +132,7 @@ module.exports = [
   },
   {
     name: "v3b6 true",
-    appConfig: { valid_content_headers: false },
+    appConfig: { validContentHeaders: false },
     method: "GET",
     path: "/",
     headers: {},
@@ -142,7 +141,7 @@ module.exports = [
   },
   {
     name: "v3b6 false",
-    appConfig: { allowed_methods_sync: ["PUT"], content_types_accepted_sync: ["text/plain"] },
+    appConfig: { allowedMethodsSync: ["PUT"], contentTypesAcceptedSync: ["text/plain"] },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "application/javascript" },
@@ -151,7 +150,7 @@ module.exports = [
   },
   {
     name: "v3b5 false",
-    appConfig: { allowed_methods_sync: ["PUT"], content_types_accepted_sync: ["text/plain"] },
+    appConfig: { allowedMethodsSync: ["PUT"], contentTypesAcceptedSync: ["text/plain"] },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "application/javascript" },
@@ -160,7 +159,7 @@ module.exports = [
   },
   {
     name: "v3b5 true",
-    appConfig: { allowed_methods_sync: ["PUT"], content_types_accepted_sync: ["application/octet-stream", "text/plain"], validEntityLength: false },
+    appConfig: { allowedMethodsSync: ["PUT"], contentTypesAcceptedSync: ["application/octet-stream", "text/plain"], validEntityLength: false },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "text/plain" },
@@ -169,7 +168,7 @@ module.exports = [
   },
   {
     name: "v3b5 true (*/*)",
-    appConfig: { allowed_methods_sync: ["PUT"], content_types_accepted_sync: ["application/octet-stream", "*/*"], validEntityLength: false },
+    appConfig: { allowedMethodsSync: ["PUT"], contentTypesAcceptedSync: ["application/octet-stream", "*/*"], validEntityLength: false },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "text/plain" },
@@ -178,7 +177,7 @@ module.exports = [
   },
   {
     name: "v3b5 true ([])",
-    appConfig: { allowed_methods_sync: ["PUT"], content_types_accepted_sync: [], validEntityLength: false },
+    appConfig: { allowedMethodsSync: ["PUT"], contentTypesAcceptedSync: [], validEntityLength: false },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "application/octet-stream" },
@@ -187,7 +186,7 @@ module.exports = [
   },
   {
     name: "v3b5 true (no content-type)",
-    appConfig: { allowed_methods_sync: ["PUT", "GET"], content_types_accepted_sync: ["application/octet-stream", "text/plain"], validEntityLength: false },
+    appConfig: { allowedMethodsSync: ["PUT", "GET"], contentTypesAcceptedSync: ["application/octet-stream", "text/plain"], validEntityLength: false },
     method: "PUT",
     path: "/",
     headers: {},
@@ -205,7 +204,7 @@ module.exports = [
   },
   {
     name: "v3b4 true",
-    appConfig: { validEntityLength: true, allowed_methods_sync: ["OPTIONS", "GET"] },
+    appConfig: { validEntityLength: true, allowedMethodsSync: ["OPTIONS", "GET"] },
     method: "OPTIONS",
     path: "/",
     headers: {},
@@ -214,7 +213,7 @@ module.exports = [
   },
   {
     name: "v3b3 true",
-    appConfig: { allowed_methods_sync: ["OPTIONS", "GET"] },
+    appConfig: { allowedMethodsSync: ["OPTIONS", "GET"] },
     method: "OPTIONS",
     path: "/",
     headers: {},
@@ -223,7 +222,7 @@ module.exports = [
   },
   {
     name: "v3c4 false",
-    appConfig: { content_types_provided_sync: ["text/plain", "text/html"] },
+    appConfig: { contentTypesProvidedSync: ["text/plain", "text/html"] },
     method: "GET",
     path: "/",
     headers: { "Accept": "application/javascript" },
@@ -232,7 +231,7 @@ module.exports = [
   },
   {
     name: "v3c4 true (*/*)",
-    appConfig: { content_types_provided_sync: ["text/plain", "text/html"], language_available: ["de"] },
+    appConfig: { contentTypesProvidedSync: ["text/plain", "text/html"], languageAvailable: ["de"] },
     method: "GET",
     path: "/",
     headers: { "Accept": "*/*", "Accept-language": "en" },
@@ -241,7 +240,7 @@ module.exports = [
   },
   {
     name: "v3c4 true ([])",
-    appConfig: { content_types_provided_sync: [], language_available: ["de"] },
+    appConfig: { contentTypesProvidedSync: [], languageAvailable: ["de"] },
     method: "GET",
     path: "/",
     headers: { "Accept": "text/html", "Accept-language": "en" },
@@ -250,7 +249,7 @@ module.exports = [
   },
   {
     name: "v3d5 false",
-    appConfig: { language_available: ["de", "fr"] },
+    appConfig: { languageAvailable: ["de", "fr"] },
     method: "GET",
     path: "/",
     headers: { "Accept-language": "en" },
@@ -259,7 +258,7 @@ module.exports = [
   },
   {
     name: "v3d5 true",
-    appConfig: { language_available: ["de", "fr"], charsets_provided_sync: ["iso-8859-5"] },
+    appConfig: { languageAvailable: ["de", "fr"], charsetsProvidedSync: ["iso-8859-5"] },
     method: "GET",
     path: "/",
     headers: { "Accept-language": "fr", "Accept-charset": "utf-8" },
@@ -268,7 +267,7 @@ module.exports = [
   },
   {
     name: "v3d5 true (*)",
-    appConfig: { language_available: ["de", "fr"], charsets_provided_sync: ["iso-8859-5"] },
+    appConfig: { languageAvailable: ["de", "fr"], charsetsProvidedSync: ["iso-8859-5"] },
     method: "GET",
     path: "/",
     headers: { "Accept-language": "*", "Accept-charset": "utf-8" },
@@ -277,7 +276,7 @@ module.exports = [
   },
   {
     name: "v3d5 true ([])",
-    appConfig: { language_available: [], charsets_provided_sync: ["iso-8859-5"] },
+    appConfig: { languageAvailable: [], charsetsProvidedSync: ["iso-8859-5"] },
     method: "GET",
     path: "/",
     headers: { "Accept-language": "en", "Accept-charset": "utf-8" },
@@ -286,7 +285,7 @@ module.exports = [
   },
   {
     name: "v3e6 false",
-    appConfig: { charsets_provided_sync: ["iso-8859-5", "unicode-1-1"] },
+    appConfig: { charsetsProvidedSync: ["iso-8859-5", "unicode-1-1"] },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "utf-8" },
@@ -295,7 +294,7 @@ module.exports = [
   },
   {
     name: "v3e6 true",
-    appConfig: { charsets_provided_sync: ["iso-8859-5", "unicode-1-1"], encodings_provided_sync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: ["iso-8859-5", "unicode-1-1"], encodingsProvidedSync: ["chunked"] },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "unicode-1-1", "Accept-encoding": "deflate" },
@@ -304,7 +303,7 @@ module.exports = [
   },
   {
     name: "v3e6 true (*)",
-    appConfig: { charsets_provided_sync: ["iso-8859-5", "unicode-1-1"], encodings_provided_sync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: ["iso-8859-5", "unicode-1-1"], encodingsProvidedSync: ["chunked"] },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "*", "Accept-encoding": "deflate" },
@@ -313,7 +312,7 @@ module.exports = [
   },
   {
     name: "v3e6 true ([])",
-    appConfig: { charsets_provided_sync: [], encodings_provided_sync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: [], encodingsProvidedSync: ["chunked"] },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "unicode-1-1", "Accept-encoding": "deflate" },
@@ -322,7 +321,7 @@ module.exports = [
   },
   {
     name: "v3f7 false",
-    appConfig: { encodings_provided_sync: ["chunked", "deflate"] },
+    appConfig: { encodingsProvidedSync: ["chunked", "deflate"] },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "compress" },
@@ -331,7 +330,7 @@ module.exports = [
   },
   {
     name: "v3f7 true",
-    appConfig: { encodings_provided_sync: ["chunked", "deflate"], resource_exists: false },
+    appConfig: { encodingsProvidedSync: ["chunked", "deflate"], resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "deflate", "If-match": "*" },
@@ -340,7 +339,7 @@ module.exports = [
   },
   {
     name: "v3f7 true (*)",
-    appConfig: { encodings_provided_sync: ["chunked", "deflate"], resource_exists: false },
+    appConfig: { encodingsProvidedSync: ["chunked", "deflate"], resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "*", "If-match": "*" },
@@ -349,7 +348,7 @@ module.exports = [
   },
   {
     name: "v3f7 true ([])",
-    appConfig: { encodings_provided_sync: [], resource_exists: false },
+    appConfig: { encodingsProvidedSync: [], resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "deflate", "If-match": "*" },
@@ -358,7 +357,7 @@ module.exports = [
   },
   {
     name: "v3g7 false",
-    appConfig: { resource_exists: false },
+    appConfig: { resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "If-match": "*" },
@@ -367,7 +366,7 @@ module.exports = [
   },
   {
     name: "v3h7 true",
-    appConfig: { resource_exists: false },
+    appConfig: { resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "If-match": "*" },
@@ -376,7 +375,7 @@ module.exports = [
   },
   {
     name: "v3h7 false",
-    appConfig: { resource_exists: false, previously_existed: false },
+    appConfig: { resourceExists: false, previouslyExisted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -385,7 +384,7 @@ module.exports = [
   },
   {
     name: "v3i4 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ['PUT'], moved_permanently: function (context) { return("/foo"); } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: function (context) { return("/foo"); } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -394,7 +393,7 @@ module.exports = [
   },
   {
     name: "v3i4 false",
-    appConfig: { resource_exists: false, allowed_methods_sync: ['PUT'], isConflict: true },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -403,7 +402,7 @@ module.exports = [
   },
   {
     name: "v3i7 false",
-    appConfig: { resource_exists: false, previously_existed: false },
+    appConfig: { resourceExists: false, previouslyExisted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -412,7 +411,7 @@ module.exports = [
   },
   {
     name: "v3i7 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ['PUT'], moved_permanently: function (context) { return("/foo"); } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: function (context) { return("/foo"); } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -421,7 +420,7 @@ module.exports = [
   },
   {
     name: "v3k5 true",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: true },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: true },
     method: "GET",
     path: "/",
     headers: { },
@@ -430,7 +429,7 @@ module.exports = [
   },
   {
     name: "v3k7 false",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: false, moved_temporarily: true },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: false, movedTemporarily: true },
     method: "GET",
     path: "/",
     headers: { },
@@ -439,7 +438,7 @@ module.exports = [
   },
   {
     name: "v3k7 false",
-    appConfig: { resource_exists: false, previously_existed: false },
+    appConfig: { resourceExists: false, previouslyExisted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -448,7 +447,7 @@ module.exports = [
   },
   {
     name: "v3k7 true",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: true },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: true },
     method: "GET",
     path: "/",
     headers: { },
@@ -457,7 +456,7 @@ module.exports = [
   },
   {
     name: "v3l5 true",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: false, moved_temporarily: true },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: false, movedTemporarily: true },
     method: "GET",
     path: "/",
     headers: { },
@@ -466,7 +465,7 @@ module.exports = [
   },
   {
     name: "v3l5 false",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: false, moved_temporarily: false },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: false, movedTemporarily: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -475,7 +474,7 @@ module.exports = [
   },
   {
     name: "v3l7 false",
-    appConfig: { resource_exists: false, previously_existed: false },
+    appConfig: { resourceExists: false, previouslyExisted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -484,7 +483,7 @@ module.exports = [
   },
   {
     name: "v3l7 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: false },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: false },
     method: "POST",
     path: "/",
     headers: { },
@@ -493,7 +492,7 @@ module.exports = [
   },
   {
     name: "v3m5 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: true, moved_permanently: false, moved_temporarily: false },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: true, movedPermanently: false, movedTemporarily: false },
     method: "POST",
     path: "/",
     headers: { },
@@ -502,7 +501,7 @@ module.exports = [
   },
   {
     name: "v3m5 false",
-    appConfig: { resource_exists: false, previously_existed: true, moved_permanently: false, moved_temporarily: false },
+    appConfig: { resourceExists: false, previouslyExisted: true, movedPermanently: false, movedTemporarily: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -511,7 +510,7 @@ module.exports = [
   },
   {
     name: "v3m7 false",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: false },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: false },
     method: "POST",
     path: "/",
     headers: { },
@@ -520,7 +519,7 @@ module.exports = [
   },
   {
     name: "v3m7 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: false, allow_missing_post: true, postIsCreate: true, create_path: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: false, allowMissingPost: true, postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -529,7 +528,7 @@ module.exports = [
   },
   {
     name: "v3n5 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: true, moved_permanently: false, moved_temporarily: false, allow_missing_post: true, postIsCreate: true, create_path: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: true, movedPermanently: false, movedTemporarily: false, allowMissingPost: true, postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -538,7 +537,7 @@ module.exports = [
   },
   {
     name: "v3n5 false",
-    appConfig: { resource_exists: false, allowed_methods_sync: ["POST"], previously_existed: true, moved_permanently: false, moved_temporarily: false },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: true, movedPermanently: false, movedTemporarily: false },
     method: "POST",
     path: "/",
     headers: { },
@@ -547,7 +546,7 @@ module.exports = [
   },
   {
     name: "v3g7 true",
-    appConfig: { resource_exists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, resourceEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -556,7 +555,7 @@ module.exports = [
   },
   {
     name: "v3g9 false",
-    appConfig: { resource_exists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, resourceEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -565,7 +564,7 @@ module.exports = [
   },
   {
     name: "v3g9 true",
-    appConfig: { resource_exists: true, resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, resourceModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "*", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -574,7 +573,7 @@ module.exports = [
   },
   {
     name: "v3g11 false",
-    appConfig: { resource_exists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, resourceEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -583,7 +582,7 @@ module.exports = [
   },
   {
     name: "v3g11 true",
-    appConfig: { resource_exists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -592,7 +591,7 @@ module.exports = [
   },
   {
     name: "v3h11 false",
-    appConfig: { resource_exists: true, allowed_methods_sync: ["POST"] },
+    appConfig: { resourceExists: true, allowedMethodsSync: ["POST"] },
     method: "POST",
     path: "/",
     headers: { "If-Unmodified-Since": "kshfkjsdhfkdsjhfs", "If-None-Match": "*" },
@@ -601,7 +600,7 @@ module.exports = [
   },
   {
     name: "v3h12 true",
-    appConfig: { resource_exists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -646,7 +645,7 @@ module.exports = [
   },
   {
     name: "v3j18 false",
-    appConfig: { allowed_methods_sync: ["POST"] },
+    appConfig: { allowedMethodsSync: ["POST"] },
     method: "POST",
     path: "/",
     headers: { "If-None-Match": "*" },
@@ -682,7 +681,7 @@ module.exports = [
   },
   {
     name: "v3l14 false",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "smdgfshdgfhjsgdfjsnfd" },
@@ -691,7 +690,7 @@ module.exports = [
   },
   {
     name: "v3l15 true",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "Wed, 28 Nov 2029 10:23:02 GMT" },
@@ -700,7 +699,7 @@ module.exports = [
   },
   {
     name: "v3l17 true",
-    appConfig: { resourceModified: new Date("2009/11/28 5:23:02 AM"), allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { resourceModified: new Date("2009/11/28 5:23:02 AM"), allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -718,7 +717,7 @@ module.exports = [
   },
   {
     name: "v3m16 true",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -745,7 +744,7 @@ module.exports = [
   },
   {
     name: "v3n16 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: true, create_path: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -754,7 +753,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (redirect)",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: true, create_path: "/", redirectAfterPost: true, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: true, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -763,7 +762,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (no redirect)",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: true, create_path: "/", redirectAfterPost: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -772,7 +771,7 @@ module.exports = [
   },  
   {
     name: "v3n11 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -781,7 +780,7 @@ module.exports = [
   },
   {
     name: "v3p3 true",
-    appConfig: { resource_exists: false, allowed_methods_sync: ['PUT'], isConflict: true },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -790,7 +789,7 @@ module.exports = [
   },
   {
     name: "v3p3 false",
-    appConfig: { resource_exists: false, allowed_methods_sync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -799,7 +798,7 @@ module.exports = [
   },
   {
     name: "v3p11 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -808,7 +807,7 @@ module.exports = [
   },
   {
     name: "v3p11 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['POST'], postIsCreate: false, processPost: function (context) { return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -826,7 +825,7 @@ module.exports = [
   },
   {
     name: "v3o16 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['PUT'], isConflict: true },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -835,7 +834,7 @@ module.exports = [
   },
   {
     name: "v3o14 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['PUT'], isConflict: true },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -844,7 +843,7 @@ module.exports = [
   },
   {
     name: "v3o14 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowed_methods_sync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -871,7 +870,7 @@ module.exports = [
   },
   {
     name: "v3m20 false",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -880,7 +879,7 @@ module.exports = [
   },
   {
     name: "v3o20 false",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -889,7 +888,7 @@ module.exports = [
   },
   {
     name: "v3o20 true",
-    appConfig: { allowed_methods_sync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: true },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: true },
     method: "DELETE",
     path: "/",
     headers: { },

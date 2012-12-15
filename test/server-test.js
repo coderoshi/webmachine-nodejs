@@ -14,7 +14,7 @@ vows.describe('Server').addBatch({
       var self = this;
       root = {
         route: "/",
-        service_available: function(req, res, next) {
+        serviceAvailable: function(req, res, next) {
           self.callback(undefined, req, res, next);
         }
       };

@@ -4,58 +4,58 @@ class ResData
     @res = nodeRes
     @headers = {}
 
-  is_redirect: ()-> 
+  isRedirect: ()-> 
 
-  append_to_response_body: (body)->
+  appendToResponseBody: (body)->
 
   # -> string()  Look up the current value of an outgoing request header.
-  get_resp_header: (string)->
+  getRespHeader: (string)->
     @res.getHeader(string)
 
   statusCode: ()->
     @res.statusCode
 
-  # -> bool() the last value passed to do_redirect, false otherwise – if true,
+  # -> bool() the last value passed to doRedirect, false otherwise – if true,
   # then some responses will be 303 instead of 2xx where applicable
-  resp_redirect: ()->
+  respRedirect: ()->
 
-  # -> mochiheaders()  The outgoing HTTP headers. Generally, get_resp_header is
+  # -> mochiheaders()  The outgoing HTTP headers. Generally, getRespHeader is
   # more useful.
-  resp_headers: ()->
+  respHeaders: ()->
 
   # -> 'undefined', binary()  The outgoing response body, if one has been set.
-  # Usually, append_to_response_body is the best way to set this.
-  resp_body: ()->
+  # Usually, appendToResponseBody is the best way to set this.
+  respBody: ()->
 
-  has_response_body: ()-> 
+  hasResponseBody: ()-> 
 
   ## Request Modification Functions
 
   # rd() Given a header name and value, set an outgoing request header to that value.
-  set_resp_header: (string, value) ->
+  setRespHeader: (string, value) ->
 
   # rd()  Append the given value to the body of the outgoing response.
-  append_to_response_body: (binary) -> 
+  appendToResponseBody: (binary) -> 
 
-  # rd()  see resp_redirect; this sets that value.
-  do_redirect: (bool) ->
+  # rd()  see respRedirect; this sets that value.
+  doRedirect: (bool) ->
 
-  # rd()  The disp_path is the only path that can be changed during a request. This function will do so.
-  set_disp_path: (string) ->
+  # rd()  The dispPath is the only path that can be changed during a request. This function will do so.
+  setDispPath: (string) ->
 
   # rd() Replace the incoming request body with this for the rest of the processing.
-  set_req_body: (binary) ->
+  setReqBody: (binary) ->
 
   # rd()  Set the outgoing response body to this value.
-  set_resp_body: (binary) ->
+  setRespBody: (binary) ->
 
   # rd()  Use this streamed body to produce the outgoing response body on demand.
-  set_resp_body: (streambody) ->
+  setRespBody: (streambody) ->
 
   # rd()  Given a list of two-tuples of {headername,value}, set those outgoing response headers.
-  set_resp_headers: (headername, value) -> 
+  setRespHeaders: (headername, value) -> 
 
   # rd() Remove the named outgoing response header.
-  remove_resp_header: (string) ->
+  removeRespHeader: (string) ->
 
 module.exports = ResData
