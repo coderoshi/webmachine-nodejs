@@ -303,7 +303,7 @@ module.exports = [
   },
   {
     name: "v3e6 true",
-    appConfig: { charsetsProvidedSync: {"iso-8859-5":"make_iso", "unicode-1-1":"make_uni"}, encodingsProvidedSync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: {"iso-8859-5":"make_iso", "unicode-1-1":"make_uni"}, encodingsProvidedSync: {"chunked":function(body){return body;}} },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "unicode-1-1", "Accept-encoding": "deflate" },
@@ -312,7 +312,7 @@ module.exports = [
   },
   {
     name: "v3e6 true (*)",
-    appConfig: { charsetsProvidedSync: {"iso-8859-5":"make_iso", "unicode-1-1":"make_uni"}, encodingsProvidedSync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: {"iso-8859-5":"make_iso", "unicode-1-1":"make_uni"}, encodingsProvidedSync: {"chunked":function(body){return body;}} },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "*", "Accept-encoding": "deflate" },
@@ -321,7 +321,7 @@ module.exports = [
   },
   {
     name: "v3e6 true ([])",
-    appConfig: { charsetsProvidedSync: {}, encodingsProvidedSync: ["chunked"] },
+    appConfig: { charsetsProvidedSync: {}, encodingsProvidedSync: {"chunked":function(body){return body;}} },
     method: "GET",
     path: "/",
     headers: { "Accept-charset": "unicode-1-1", "Accept-encoding": "deflate" },
@@ -330,7 +330,7 @@ module.exports = [
   },
   {
     name: "v3f7 false",
-    appConfig: { encodingsProvidedSync: ["chunked", "deflate"] },
+    appConfig: { encodingsProvidedSync: {"chunked":function(body){return body;}, "deflate":function(body){return body;}} },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "compress" },
@@ -339,7 +339,7 @@ module.exports = [
   },
   {
     name: "v3f7 true",
-    appConfig: { encodingsProvidedSync: ["chunked", "deflate"], resourceExists: false },
+    appConfig: { encodingsProvidedSync: {"chunked":function(body){return body;}, "deflate":function(body){return body;}}, resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "deflate", "If-match": "*" },
@@ -348,7 +348,7 @@ module.exports = [
   },
   {
     name: "v3f7 true (*)",
-    appConfig: { encodingsProvidedSync: ["chunked", "deflate"], resourceExists: false },
+    appConfig: { encodingsProvidedSync: {"chunked":function(body){return body;}, "deflate":function(body){return body;}}, resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "*", "If-match": "*" },
@@ -357,7 +357,7 @@ module.exports = [
   },
   {
     name: "v3f7 true ([])",
-    appConfig: { encodingsProvidedSync: [], resourceExists: false },
+    appConfig: { encodingsProvidedSync: {}, resourceExists: false },
     method: "GET",
     path: "/",
     headers: { "Accept-encoding": "deflate", "If-match": "*" },

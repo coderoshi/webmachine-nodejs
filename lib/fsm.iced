@@ -89,7 +89,10 @@ class FSM
   # TODO: also allow async charsetsProvided?
   chooseCharset: (req, res, charset)->
     provided = @resource.charsetsProvidedSync(req, res)
-    if provided
+    # if charsetsProvided is set to empty, force a default
+    if _.isEmpty(provided)
+      return 'utf-8'
+    else
       charsets = _.keys(provided)
       if chosenCharset = @doChooseCharset(charsets, charset, 'utf-8')
         return @metadata['Chosen-Charset'] = chosenCharset
@@ -141,7 +144,7 @@ class FSM
 
   # TODO: implement choose encoding
   chooseEncoding: (req, res, encoding)->
-    null
+    "identity"
 
   variances: (req, res)->
     accept = if @resource.contentTypesProvidedSync(req, res).length > 1 then ["Accept"] else []
@@ -150,7 +153,7 @@ class FSM
     _.union(accept, acceptEncoding, acceptCharset, @resource.variancesSync(req, res))
 
   unquoteHeader: (header)->
-    header && header.replace(/^"(.*?)"$/, '$1')
+    if header then header.replace(/^"(.*?)"$/, '$1') else null
 
   convertRequestDate: (dateStr)->
     return null if dateStr == null || dateStr == ''
@@ -165,7 +168,6 @@ class FSM
     @v3b13(req, res)
 
   tracePush: (step)->
-    # console.log step
     @trace.push(step) if @trace?
 
   # "Service Available: Pong"
@@ -350,11 +352,6 @@ class FSM
     variances = @variances()
     res.headers['Vary'] = variances.join(", ") if variances?.length > 0
     @decisionTest(@resource.resourceExists, req, res, true, @v3g8, @v3h7)
-    # case variances() of
-    #     [] -> nop;
-    #     Variances ->
-    #         wrcall({setRespHeader, "Vary", string:join(Variances, ", ")})
-    # @decisionTest(@resource.@resourceExists(), req, res, true, @v3g8, v3h7);
 
   # "If-Match exists?"
   v3g8: (req, res) =>
@@ -621,7 +618,7 @@ class FSM
         if typeof(res) == 'number'
           @respond(result)
         else
-          @d(@v3p11)
+          @d(req, res, @v3p11)
 
   # "PUT?"
   v3o16: (req, res) =>
@@ -645,23 +642,22 @@ class FSM
             res.header["Expires"] = new Date(expires) if expires
             # httpdUtil:rfc1123Date(calendar:universalTimeToLocalTime(Exp))})
         
-            @resource.contentTypesProvidedSync req, res, (contentTypesProvided) =>
+            contentTypes = @resource.contentTypesProvidedSync(req, res)
+            contentType = @metadata['Content-Type']
+            matchingCt = contentTypes[contentType]
 
-              contentTypes = _.pairs(contentTypesProvided)
-              contentType = @metadata['Content-Type']
-              matchingCt = _.find(contentTypes, (ct) => contentType == ct[0])
-              
-              # call the content type handler
-              @resource[matchingCt[1]].apply @resource, [req, res, (result) =>
-                if typeof(result) == 'number'
-                  @respond(result)
-                else
-                  res.body = result
-                  @encodeBody(req, res)
-                  @d(@v3o18b)
-              ]
+            # call the content type handler
+            @resource[matchingCt].apply @resource, [req, res, (result) =>
+              if typeof(result) == 'number'
+                @respond(req, res, result)
+              else
+                res.body = result
+                @encodeBody(req, res)
+                @d(req, res, @v3o18b)
+            ]
     else
-      @d(@v3o18b)
+      console.log 'd'
+      @d(req, res, @v3o18b)
 
   v3o18b: (req, res) =>
     @tracePush 'v3o18b'
@@ -683,7 +679,7 @@ class FSM
         if typeof(res) == 'number'
           @respond(result)
         else
-          @d(@v3p11)
+          @d(req, res, @v3p11)
 
   # New @resource?  (at this point boils down to "has location header")
   v3p11: (req, res) =>

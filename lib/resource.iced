@@ -11,7 +11,7 @@ class Resource
   # TODO: make async versions available?
   knownMethodsSync: (req, res) -> ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT', 'OPTIONS']
   allowedMethodsSync: (req, res) -> ['GET', 'HEAD']
-  charsetsProvidedSync: (req, res) -> {"iso-8859-1" : (x) -> x}
+  charsetsProvidedSync: (req, res) -> {"utf-8" : (x) -> x}
   encodingsProvidedSync: (req, res) -> {"identity" : (x) -> x}
   contentTypesProvidedSync: (req, res) -> {"text/html" : 'toHtml'}
   contentTypesAcceptedSync: (req, res) -> []

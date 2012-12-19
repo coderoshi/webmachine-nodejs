@@ -42,6 +42,9 @@ function buildTest(test) {
         finishRequest: function(req, res) {
           self.callback(undefined, req, res);
         },
+        toHtml: function(req, res, next) {
+          next("<html/>");
+        }
       }
       _.each(test.appConfig, function(val, key){
         if(!mockResource[key]) {
@@ -67,7 +70,7 @@ function buildTest(test) {
     'and is correct': function (err, req, res) {
       assert.notEqual(res, undefined, 'res is required');
       assert.notEqual(req, undefined, 'req is required');
-      // console.log(res.trace)
+      // console.dir(res.trace)
       assert.equal(res.statusCode(), test.checkStatus);
       assert.deepEqual(res.trace, test.checkStack);
     }
