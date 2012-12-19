@@ -42,7 +42,9 @@ class ReqData
 
   # -> mochiheaders() The incoming HTTP headers. Generally, getReqHeader is more useful.
   # TODO: downcase?
-  reqHeaders: ()-> @req.headers
+  reqHeaders: ()->
+    # console.log @req.headers
+    @req.headers
 
   # TODO: it'd be nice to make this blocking. but, whatever
   # -> 'undefined', binary() The incoming request body, if any.
