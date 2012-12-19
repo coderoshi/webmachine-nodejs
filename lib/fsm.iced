@@ -585,7 +585,7 @@ class FSM
               baseUri = @resource.baseUri() || req.baseUri()
               req.dispPath = baseUri + '/' + uri
               res.headers['Location'] = req.dispPath
-              result = acceptHelper()
+              result = @acceptHelper()
               if typeof(result) == 'number'
                 @respond(result)
               else
@@ -614,7 +614,7 @@ class FSM
       if isConflict
         @respond(409)
       else
-        result = acceptHelper()
+        result = @acceptHelper()
         if typeof(res) == 'number'
           @respond(result)
         else
@@ -675,7 +675,7 @@ class FSM
       if isConflict
         @respond(409)
       else
-        result = acceptHelper()
+        result = @acceptHelper()
         if typeof(res) == 'number'
           @respond(result)
         else
