@@ -9,6 +9,9 @@ class ReqData
 
   ## request functions
 
+  baseUri: ()->
+    "#{@url.protocol}//#{@url.host}"
+
   # -> {integer(),integer()}  The HTTP version used by the client. Most often 1.1 .
   version: ()-> 
     '1.1'

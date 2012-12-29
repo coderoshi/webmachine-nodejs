@@ -2,9 +2,10 @@
 class ResData
   constructor: (nodeRes)->
     @res = nodeRes
+    @redirect = false
     @headers = {}
 
-  isRedirect: ()-> 
+  # isRedirect: ()-> 
 
   appendToResponseBody: (body)->
 
@@ -17,7 +18,7 @@ class ResData
 
   # -> bool() the last value passed to doRedirect, false otherwise – if true,
   # then some responses will be 303 instead of 2xx where applicable
-  respRedirect: ()->
+  respRedirect: ()-> @redirect
 
   # -> mochiheaders()  The outgoing HTTP headers. Generally, getRespHeader is
   # more useful.
@@ -33,12 +34,13 @@ class ResData
 
   # rd() Given a header name and value, set an outgoing request header to that value.
   setRespHeader: (string, value) ->
+    @headers[string] = value
 
   # rd()  Append the given value to the body of the outgoing response.
   appendToResponseBody: (binary) -> 
 
   # rd()  see respRedirect; this sets that value.
-  doRedirect: (bool) ->
+  doRedirect: (bool) -> @redirect = bool
 
   # rd()  The dispPath is the only path that can be changed during a request. This function will do so.
   setDispPath: (string) ->

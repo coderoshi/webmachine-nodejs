@@ -15,9 +15,9 @@ var _         = require('underscore'),
 var port = 9000;
 var baseUrl = '127.0.0.1';
 
-// var test = _.find(scenarios, function(val){
-//   return val.name == 'v3d5 true';
-// });
+var test = _.find(scenarios, function(val){
+  return val.name == process.env.TEST;
+});
 
 function buildTest(test) {
   return {
@@ -35,6 +35,19 @@ function buildTest(test) {
       var mockNodeRes = {
         end: function(){
           // console.log('done');
+        },
+        writeHead: function(code, header){
+          this.statusCode = code;
+          this.header = header;
+        },
+        setHeader: function(field, header){
+          if(!this.header) {
+            this.header = {};
+          }
+          this.header[field] = header;
+        },
+        write: function(data) {
+          this.body = data;
         }
       };
       var mockResource = {

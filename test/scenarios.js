@@ -150,7 +150,7 @@ module.exports = [
   },
   {
     name: "v3b6 false",
-    appConfig: { allowedMethodsSync: ["PUT"], knownContentType: false }, //contentTypesAcceptedSync: ["text/plain"] },
+    appConfig: { allowedMethodsSync: ["PUT"], knownContentType: false }, //contentTypesAcceptedSync: {"text/plain": "textPlain"} },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "application/javascript" },
@@ -159,7 +159,7 @@ module.exports = [
   },
   {
     name: "v3b5 false",
-    appConfig: { allowedMethodsSync: ["PUT"], knownContentType: false }, //contentTypesAcceptedSync: ["text/plain"] },
+    appConfig: { allowedMethodsSync: ["PUT"], knownContentType: false }, //contentTypesAcceptedSync: {"text/plain": "textPlain"} },
     method: "PUT",
     path: "/",
     headers: { "Content-type": "application/javascript" },
@@ -393,7 +393,7 @@ module.exports = [
   },
   {
     name: "v3i4 true",
-    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: function (context) { return("/foo"); } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: "/foo" },
     method: "PUT",
     path: "/",
     headers: { },
@@ -420,7 +420,7 @@ module.exports = [
   },
   {
     name: "v3i7 true",
-    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: function (context) { return("/foo"); } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], movedPermanently: "/foo" },
     method: "PUT",
     path: "/",
     headers: { },
@@ -528,7 +528,7 @@ module.exports = [
   },
   {
     name: "v3m7 true",
-    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: false, allowMissingPost: true, postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: false, allowMissingPost: true, postIsCreate: true, createPath: "/", contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(true); res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -537,7 +537,7 @@ module.exports = [
   },
   {
     name: "v3n5 true",
-    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: true, movedPermanently: false, movedTemporarily: false, allowMissingPost: true, postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ["POST"], previouslyExisted: true, movedPermanently: false, movedTemporarily: false, allowMissingPost: true, postIsCreate: true, createPath: "/", contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(true); res.setRespHeader("Location", "/foo"); next(true); } } }, // acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },

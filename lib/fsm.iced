@@ -3,7 +3,7 @@ _    = require('underscore')
 class FSM
   constructor: (resource, trace)->
     @resource = resource
-    # TODO: Ruby had a good idea, but actually use this if you can do it async
+    # TODO: actually use this if you can do it async
     @metadata = {}
     @trace = trace
 
@@ -52,6 +52,7 @@ class FSM
     switch code
       when 404
         res.res.writeHead(404, {'Content-Type': 'text/plain'})
+        res.res.statusCode = 404
         res.res.write('File Not Found')
       when 304
         delete res.headers['Content-Type']
@@ -142,9 +143,19 @@ class FSM
     # else
     #   _.find(charsets, (cs)-> cs == charset)
 
-  # TODO: implement choose encoding
+  # TODO: sort using q values
   chooseEncoding: (req, res, encoding)->
-    "identity"
+    accepted = encoding.split(/,\s*/)
+    provided = @resource.encodingsProvidedSync(req, res)
+    match = _.isEmpty(provided)
+    accepted_encoding = null
+    accepted_encoding = accepted[0] if match
+    while !match && accepted.length
+      accept = accepted.shift().split(/\s*;\s*/)[0].toLowerCase()
+      match = ((accept == "*") || (provided[accept]?)) #.indexOf(accept) > -1))
+      accepted_encoding = accept if match
+    @metadata['accept-encoding'] = accepted_encoding
+
 
   variances: (req, res)->
     accept = if @resource.contentTypesProvidedSync(req, res).length > 1 then ["Accept"] else []
@@ -343,6 +354,8 @@ class FSM
   # Acceptable encoding available?
   v3f7: (req, res) =>
     @tracePush 'v3f7'
+    # console.log @getHeaderVal(req, "accept-encoding")
+    # console.log @chooseEncoding(req, res, @getHeaderVal(req, "accept-encoding"))
     @decisionTest(@chooseEncoding(req, res, @getHeaderVal(req, "accept-encoding")), req, res, null, 406, @v3g7)
 
   # "@resource exists?"
@@ -417,7 +430,7 @@ class FSM
         @resource.movedPermanently req, res, (reply)=>
           switch typeof(reply)
             when 'string'
-              response.headers["Location"] = reply
+              res.headers["Location"] = reply
               next(301)
             # when 'number'
             #   next(reply)
@@ -488,7 +501,7 @@ class FSM
               next(307)
             else
               next(reply)
-    , req, res, true, 301, @v3m5)
+    , req, res, true, 307, @v3m5)
 
   # "POST?"
   v3l7: (req, res) =>
@@ -564,8 +577,9 @@ class FSM
     @decisionTest(@resource.allowMissingPost, req, res, true, @v3n11, 410)
 
   stage1Ok: (req, res) =>
-    @tracePush 'stage1Ok'
-    if res.isRedirect()
+    # @tracePush 'stage1Ok'
+    console.log res.respRedirect()
+    if res.respRedirect() #isRedirect()
       if res.headers['Location']
         @respond(req, res, 303)
       else
@@ -582,20 +596,22 @@ class FSM
         @resource.createPath req, res, (uri)=>
           if uri
             @resource.baseUri req, res, (baseUri)=>
-              baseUri = @resource.baseUri() || req.baseUri()
-              req.dispPath = baseUri + '/' + uri
-              res.headers['Location'] = req.dispPath
-              result = @acceptHelper()
-              if typeof(result) == 'number'
-                @respond(result)
-              else
-                @stage1Ok(req, res)
+              baseUri ||= req.baseUri()
+              # req.dispPath = baseUri + '/' + uri
+              # res.headers['Location'] = req.dispPath()
+              dispPath = baseUri + '/' + uri
+              res.headers['Location'] = dispPath
+              @acceptHelper req, res, (result)=>
+                if typeof(result) == 'number'
+                  @respond(req, res, result)
+                else
+                  @stage1Ok(req, res)
           else
             @errorResponse('postIsCreate w/o createPath')
       else
         @resource.processPost req, res, (processedPost)=>
           if typeof(processedPost)
-            @respond(processedPost)
+            @respond(req, res, processedPost)
           else if processedPost
             # TODO: encodeBodyIfSet()
             @stage1Ok(req, res)
@@ -612,11 +628,11 @@ class FSM
     @tracePush 'v3o14'
     @resource.isConflict req, res, (isConflict)=>
       if isConflict
-        @respond(409)
+        @respond(req, res, 409)
       else
-        result = @acceptHelper()
+        result = @acceptHelper(req)
         if typeof(res) == 'number'
-          @respond(result)
+          @respond(req, res, result)
         else
           @d(req, res, @v3p11)
 
@@ -656,7 +672,7 @@ class FSM
                 @d(req, res, @v3o18b)
             ]
     else
-      console.log 'd'
+      # console.log 'd'
       @d(req, res, @v3o18b)
 
   v3o18b: (req, res) =>
@@ -666,18 +682,18 @@ class FSM
   # Response includes an entity?
   v3o20: (req, res) =>
     @tracePush 'v3o20'
-    @decisionTest(req.hasResponseBody(), req, res, true, @v3o18, 204)
+    @decisionTest(res.hasResponseBody(), req, res, true, @v3o18, 204)
 
   # Conflict?
   v3p3: (req, res) =>
     @tracePush 'v3p3'
     @resource.isConflict req, res, (isConflict)=>
       if isConflict
-        @respond(409)
+        @respond(req, res, 409)
       else
-        result = @acceptHelper()
+        result = @acceptHelper(req)
         if typeof(res) == 'number'
-          @respond(result)
+          @respond(req, res, result)
         else
           @d(req, res, @v3p11)
 
@@ -686,19 +702,35 @@ class FSM
     @tracePush 'v3p11'
     @decisionTest(@getHeaderVal(req, 'location'), req, res, null, @v3o20, 201)
 
-  acceptHelper: () ->
-    null
-    # CT = case getHeaderVal("Content-Type") of
-    #          undefined -> "application/octet-stream";
-    #          Other -> Other
-    #      end,
+  # TODO: should require a callback
+  acceptHelper: (req, res, next) ->
+    # null
+    ct = @getHeaderVal(req, 'content-type') || "application/octet-stream"
+    mt = ct.split(';')[0]
+    contentTypesAccepted = @resource.contentTypesAcceptedSync()
+    func = null
+    func = contentTypesAccepted[mt] if contentTypesAccepted?
+    if func?
+      # TODO: allow string or function
+      # @resource[func].apply
+      func.apply @resource, [req, res, (result) =>
+        # encodeBodyIfSet()
+        next(result)
+      ]
+
+      # TODO: encodeBodyIfSet()
+      # true
+    else
+      # @respond(req, res, 415)
+      # 415
+      next(415)
+
     # {MT, MParams} = webmachineUtil:mediaTypeToDetail(CT),
     # wrcall({setMetadata, 'mediaparams', MParams}),
-    # case [Fun || {Type,Fun} <-
-    #                  resourceCall(contentTypesAcceptedSync), MT =:= Type] of
+    # case [Fun || {Type, Fun} <- @resource.contentTypesAcceptedSync(), MT =:= Type] of
     #     [] -> {respond,415};
     #     AcceptedContentList ->
-    #         F = hd(AcceptedContentList),
+    #         F = AcceptedContentList[0],
     #         case resourceCall(F) of
     #             true ->
     #                 encodeBodyIfSet(),

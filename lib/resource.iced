@@ -14,7 +14,7 @@ class Resource
   charsetsProvidedSync: (req, res) -> {"utf-8" : (x) -> x}
   encodingsProvidedSync: (req, res) -> {"identity" : (x) -> x}
   contentTypesProvidedSync: (req, res) -> {"text/html" : 'toHtml'}
-  contentTypesAcceptedSync: (req, res) -> []
+  contentTypesAcceptedSync: (req, res) -> {}
   variancesSync: (req, res) -> []
   optionsSync: (req, res) -> []
   
