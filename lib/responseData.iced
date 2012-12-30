@@ -4,14 +4,18 @@ class ResData
     @res = nodeRes
     @redirect = false
     @headers = {}
+    @body = null
 
   # isRedirect: ()-> 
 
   appendToResponseBody: (body)->
+    @body = "" if @body == null
+    @body += body
 
   # -> string()  Look up the current value of an outgoing request header.
   getRespHeader: (string)->
-    @res.getHeader(string)
+    # @res.getHeader(string)
+    @headers[string] || null
 
   statusCode: ()->
     @res.statusCode
@@ -22,13 +26,15 @@ class ResData
 
   # -> mochiheaders()  The outgoing HTTP headers. Generally, getRespHeader is
   # more useful.
-  respHeaders: ()->
+  respHeaders: ()-> @headers
 
   # -> 'undefined', binary()  The outgoing response body, if one has been set.
   # Usually, appendToResponseBody is the best way to set this.
   respBody: ()->
+    @body
 
   hasResponseBody: ()-> 
+    @body != null
 
   ## Request Modification Functions
 

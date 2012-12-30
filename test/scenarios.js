@@ -740,7 +740,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
   },
   {
     name: "v3n16 false",
@@ -749,11 +749,11 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
   },
   {
     name: "v3n16 true",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(true); res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -762,7 +762,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (redirect)",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: true, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(true); res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -771,7 +771,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (no redirect)",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(false); res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -780,7 +780,7 @@ module.exports = [
   },  
   {
     name: "v3n11 false",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function(req, res, next) { res.setRespHeader("Location", "/foo"); next(true); } },
     method: "POST",
     path: "/",
     headers: { },
@@ -798,7 +798,7 @@ module.exports = [
   },
   {
     name: "v3p3 false",
-    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { resourceExists: false, allowedMethodsSync: ['PUT'], isConflict: false, contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.doRedirect(true); res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -807,7 +807,7 @@ module.exports = [
   },
   {
     name: "v3p11 true",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function(req, res, next) { res.setRespHeader("Location", "/foo"); next(true); } },
     method: "POST",
     path: "/",
     headers: { },
@@ -816,7 +816,7 @@ module.exports = [
   },
   {
     name: "v3p11 false",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: true },
     method: "POST",
     path: "/",
     headers: { },
@@ -830,7 +830,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
   },
   {
     name: "v3o16 true",
@@ -852,7 +852,7 @@ module.exports = [
   },
   {
     name: "v3o14 false",
-    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['PUT'], isConflict: false, contentTypesAcceptedSync: {"application/octet-stream" : function(req, res, next){ res.setRespHeader("Location", "/foo"); next(true); } } }, //acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -866,7 +866,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
   },
   {
     name: "v3o18 true",
@@ -875,7 +875,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 300,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
   },
   {
     name: "v3m20 false",
@@ -888,22 +888,23 @@ module.exports = [
   },
   {
     name: "v3o20 false",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true, responseEntityExists: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true }, //responseEntityExists: false },
     method: "DELETE",
     path: "/",
     headers: { },
     checkStatus: 204,
     checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3m20", "v3m20b", "v3o20"],
   },
-  {
-    name: "v3o20 true",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true, responseEntityExists: true },
-    method: "DELETE",
-    path: "/",
-    headers: { },
-    checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3m20", "v3m20b", "v3o20", "v3o18"],
-  },
+  // TODO: Rewrite with responseEntityExists replacement
+  // {
+  //   name: "v3o20 true",
+  //   appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true, responseEntityExists: true },
+  //   method: "DELETE",
+  //   path: "/",
+  //   headers: { },
+  //   checkStatus: 200,
+  //   checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3m20", "v3m20b", "v3o20", "v3o18"],
+  // },
   {
     name: "Send ETag",
     appConfig: { generateEtag: "xxx" },
@@ -911,7 +912,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
     checkHeaders: function (headers) {
       return(headers["etag"] == "xxx");
     }
@@ -923,7 +924,7 @@ module.exports = [
     path: "/",
     headers: { },
     checkStatus: 200,
-    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18"],
+    checkStack: ["v3b13", "v3b13b", "v3b12", "v3b11", "v3b10", "v3b9", "v3b8", "v3b7", "v3b6", "v3b5", "v3b4", "v3b3", "v3c3", "v3d4", "v3e5", "v3f6", "v3g7", "v3g8", "v3h10", "v3i12", "v3l13", "v3m16", "v3n16", "v3o16", "v3o18", "v3o18b"],
     checkHeaders: function (headers) {
       return(headers["expires"] == "Fri, 28 Nov 1975 10:23:02 GMT");
     }

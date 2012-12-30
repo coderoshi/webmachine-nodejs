@@ -579,7 +579,7 @@ class FSM
 
   stage1Ok: (req, res) =>
     # @tracePush 'stage1Ok'
-    console.log res.respRedirect()
+    # console.log res.respRedirect()
     if res.respRedirect() #isRedirect()
       if res.headers['Location']
         @respond(req, res, 303)
@@ -601,7 +601,8 @@ class FSM
               # req.dispPath = baseUri + '/' + uri
               # res.headers['Location'] = req.dispPath()
               dispPath = baseUri + '/' + uri
-              res.headers['Location'] = dispPath
+              # res.headers['Location'] = dispPath
+              res.setRespHeader('Location', dispPath)
               @acceptHelper req, res, (result)=>
                 if typeof(result) == 'number'
                   @respond(req, res, result)
@@ -611,7 +612,7 @@ class FSM
             @errorResponse('postIsCreate w/o createPath')
       else
         @resource.processPost req, res, (processedPost)=>
-          if typeof(processedPost)
+          if typeof(processedPost) == 'number'
             @respond(req, res, processedPost)
           else if processedPost
             # TODO: encodeBodyIfSet()
@@ -631,11 +632,11 @@ class FSM
       if isConflict
         @respond(req, res, 409)
       else
-        result = @acceptHelper(req)
-        if typeof(res) == 'number'
-          @respond(req, res, result)
-        else
-          @d(req, res, @v3p11)
+        @acceptHelper req, res, (result)=>
+          if typeof(res) == 'number'
+            @respond(req, res, result)
+          else
+            @d(req, res, @v3p11)
 
   # "PUT?"
   v3o16: (req, res) =>
@@ -692,20 +693,20 @@ class FSM
       if isConflict
         @respond(req, res, 409)
       else
-        result = @acceptHelper(req)
-        if typeof(res) == 'number'
-          @respond(req, res, result)
-        else
-          @d(req, res, @v3p11)
+        @acceptHelper req, res, (result)=>
+          if typeof(res) == 'number'
+            @respond(req, res, result)
+          else
+            @d(req, res, @v3p11)
 
   # New @resource?  (at this point boils down to "has location header")
   v3p11: (req, res) =>
     @tracePush 'v3p11'
-    @decisionTest(@getHeaderVal(req, 'location'), req, res, null, @v3o20, 201)
+    # console.log res.getRespHeader('Location')
+    @decisionTest(res.getRespHeader('Location'), req, res, null, @v3o20, 201)
 
   # TODO: should require a callback
-  acceptHelper: (req, res, next) ->
-    # null
+  acceptHelper: (req, res, next) =>
     ct = @getHeaderVal(req, 'content-type') || "application/octet-stream"
     mt = ct.split(';')[0]
     contentTypesAccepted = @resource.contentTypesAcceptedSync()
