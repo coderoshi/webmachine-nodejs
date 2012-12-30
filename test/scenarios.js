@@ -555,7 +555,7 @@ module.exports = [
   },
   {
     name: "v3g7 true",
-    appConfig: { resourceExists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, generateEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -564,7 +564,7 @@ module.exports = [
   },
   {
     name: "v3g9 false",
-    appConfig: { resourceExists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, generateEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -573,7 +573,7 @@ module.exports = [
   },
   {
     name: "v3g9 true",
-    appConfig: { resourceExists: true, resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, lastModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "*", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -582,7 +582,7 @@ module.exports = [
   },
   {
     name: "v3g11 false",
-    appConfig: { resourceExists: true, resourceEtag: "yyy" },
+    appConfig: { resourceExists: true, generateEtag: "yyy" },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx" },
@@ -591,7 +591,7 @@ module.exports = [
   },
   {
     name: "v3g11 true",
-    appConfig: { resourceExists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, generateEtag: "xxx", lastModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -609,7 +609,7 @@ module.exports = [
   },
   {
     name: "v3h12 true",
-    appConfig: { resourceExists: true, resourceEtag: "xxx", resourceModified: new Date("2009/11/28 5:23:02 AM") },
+    appConfig: { resourceExists: true, generateEtag: "xxx", lastModified: new Date("2009/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-match": "xxx", "If-Unmodified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -618,7 +618,7 @@ module.exports = [
   },
   {
     name: "v3h12 false",
-    appConfig: { resourceModified: new Date("1975/11/28 5:23:02 AM") },
+    appConfig: { lastModified: new Date("1975/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-Unmodified-Since": "Sat, 28 Nov 2009 10:23:02 GMT", "If-None-Match": "*" },
@@ -636,7 +636,7 @@ module.exports = [
   },
   {
     name: "v3i13 false",
-    appConfig: { resourceEtag: "xxx" },
+    appConfig: { generateEtag: "xxx" },
     method: "GET",
     path: "/",
     headers: { "If-None-Match": "xxx" },
@@ -645,7 +645,7 @@ module.exports = [
   },
   {
     name: "v3k13 true",
-    appConfig: { resourceEtag: "xxx" },
+    appConfig: { generateEtag: "xxx" },
     method: "GET",
     path: "/",
     headers: { "If-None-Match": "xxx" },
@@ -681,7 +681,7 @@ module.exports = [
   },
   {
     name: "v3k13 false",
-    appConfig: { resourceEtag: "yyy", resourceModified: new Date("1975/11/28 5:23:02 AM") },
+    appConfig: { generateEtag: "yyy", lastModified: new Date("1975/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-None-Match": "xxx", "If-Modified-Since": "Sat, 28 Nov 2009 10:23:02 GMT" },
@@ -690,7 +690,7 @@ module.exports = [
   },
   {
     name: "v3l14 false",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "smdgfshdgfhjsgdfjsnfd" },
@@ -699,7 +699,7 @@ module.exports = [
   },
   {
     name: "v3l15 true",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "Wed, 28 Nov 2029 10:23:02 GMT" },
@@ -708,7 +708,7 @@ module.exports = [
   },
   {
     name: "v3l17 true",
-    appConfig: { resourceModified: new Date("2009/11/28 5:23:02 AM"), allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { lastModified: new Date("2009/11/28 5:23:02 AM"), allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: false },
     method: "DELETE",
     path: "/",
     headers: { "If-Modified-Since": "Fri, 28 Nov 1975 10:23:02 GMT" },
@@ -717,7 +717,7 @@ module.exports = [
   },
   {
     name: "v3l17 false",
-    appConfig: { resourceModified: new Date("1975/11/28 5:23:02 AM") },
+    appConfig: { lastModified: new Date("1975/11/28 5:23:02 AM") },
     method: "GET",
     path: "/",
     headers: { "If-Modified-Since": "Sat, 28 Nov 2009 10:23:02 GMT" },
@@ -726,7 +726,7 @@ module.exports = [
   },
   {
     name: "v3m16 true",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -735,7 +735,7 @@ module.exports = [
   },
   {
     name: "v3m16 false",
-    appConfig: { deleteResource: true, deleteComplete: false },
+    appConfig: { deleteResource: true, deleteCompleted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -744,7 +744,7 @@ module.exports = [
   },
   {
     name: "v3n16 false",
-    appConfig: { deleteResource: true, deleteComplete: false },
+    appConfig: { deleteResource: true, deleteCompleted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -753,7 +753,7 @@ module.exports = [
   },
   {
     name: "v3n16 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -762,7 +762,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (redirect)",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: true, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: true, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -771,7 +771,7 @@ module.exports = [
   },
   {
     name: "v3n11 true (no redirect)",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: true, createPath: "/", redirectAfterPost: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -780,7 +780,7 @@ module.exports = [
   },  
   {
     name: "v3n11 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -807,7 +807,7 @@ module.exports = [
   },
   {
     name: "v3p11 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -816,7 +816,7 @@ module.exports = [
   },
   {
     name: "v3p11 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['POST'], postIsCreate: false, processPost: function (context) { return(true) } },
     method: "POST",
     path: "/",
     headers: { },
@@ -825,7 +825,7 @@ module.exports = [
   },
   {
     name: "v3o16 false",
-    appConfig: { deleteResource: true, deleteComplete: false },
+    appConfig: { deleteResource: true, deleteCompleted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -834,7 +834,7 @@ module.exports = [
   },
   {
     name: "v3o16 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: true },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -843,7 +843,7 @@ module.exports = [
   },
   {
     name: "v3o14 true",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: true },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['PUT'], isConflict: true },
     method: "PUT",
     path: "/",
     headers: { },
@@ -852,7 +852,7 @@ module.exports = [
   },
   {
     name: "v3o14 false",
-    appConfig: { deleteResource: true, deleteComplete: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
+    appConfig: { deleteResource: true, deleteCompleted: false, allowedMethodsSync: ['PUT'], isConflict: false, acceptContent: function (context) { context.res.setHeader("Location", "/foo"); return(true) } },
     method: "PUT",
     path: "/",
     headers: { },
@@ -861,7 +861,7 @@ module.exports = [
   },
   {
     name: "v3o18 false",
-    appConfig: { deleteResource: true, deleteComplete: false },
+    appConfig: { deleteResource: true, deleteCompleted: false },
     method: "GET",
     path: "/",
     headers: { },
@@ -870,7 +870,7 @@ module.exports = [
   },
   {
     name: "v3o18 true",
-    appConfig: { deleteResource: true, deleteComplete: false, multipleChoices: true },
+    appConfig: { deleteResource: true, deleteCompleted: false, multipleChoices: true },
     method: "GET",
     path: "/",
     headers: { },
@@ -879,7 +879,7 @@ module.exports = [
   },
   {
     name: "v3m20 false",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -888,7 +888,7 @@ module.exports = [
   },
   {
     name: "v3o20 false",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: false },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true, responseEntityExists: false },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -897,7 +897,7 @@ module.exports = [
   },
   {
     name: "v3o20 true",
-    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteComplete: true, responseEntityExists: true },
+    appConfig: { allowedMethodsSync: ['DELETE'], deleteResource: true, deleteCompleted: true, responseEntityExists: true },
     method: "DELETE",
     path: "/",
     headers: { },
@@ -906,7 +906,7 @@ module.exports = [
   },
   {
     name: "Send ETag",
-    appConfig: { resourceEtag: "xxx" },
+    appConfig: { generateEtag: "xxx" },
     method: "GET",
     path: "/",
     headers: { },

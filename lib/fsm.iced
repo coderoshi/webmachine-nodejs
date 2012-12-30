@@ -170,6 +170,7 @@ class FSM
     return null if dateStr == null || dateStr == ''
     date = new Date(dateStr)
     date = null if isNaN(date.getTime())
+    date
 
   # TODO: encode this body
   encodeBody: (req, res) =>
@@ -648,14 +649,14 @@ class FSM
     if req.method == 'GET' || req.method == 'HEAD'
       # TODO: call these async
       @resource.generateEtag req, res, (etag) =>
-        res.header["ETag"] = "\"#{etag}\"" if etag
+        res.headers["ETag"] = "\"#{etag}\"" if etag
 
         @resource.lastModified req, res, (lastModified) =>
-          res.header["Last-Modified"] = new Date(lastModified) if lastModified
+          res.headers["Last-Modified"] = new Date(lastModified) if lastModified
           # httpdUtil:rfc1123Date(calendar:universalTimeToLocalTime(LM))
 
           @resource.expires req, res, (expires) =>
-            res.header["Expires"] = new Date(expires) if expires
+            res.headers["Expires"] = new Date(expires) if expires
             # httpdUtil:rfc1123Date(calendar:universalTimeToLocalTime(Exp))})
         
             contentTypes = @resource.contentTypesProvidedSync(req, res)
