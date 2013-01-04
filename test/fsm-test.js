@@ -90,7 +90,7 @@ function buildTest(test) {
       assert.notEqual(req, undefined, 'req is required');
       // TODO: Use path
       // TODO: Check headers
-      // assert.equal(res.statusCode(), test.checkStatus);
+      assert.equal(res.statusCode(), test.checkStatus);
       assert.deepEqual(res.trace, test.checkStack);
     }
   };

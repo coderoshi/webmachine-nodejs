@@ -6,12 +6,6 @@ class ResData
     @headers = {}
     @body = null
 
-  # isRedirect: ()-> 
-
-  appendToResponseBody: (body)->
-    @body = "" if @body == null
-    @body += body
-
   # -> string()  Look up the current value of an outgoing request header.
   getRespHeader: (string)->
     # @res.getHeader(string)
@@ -43,27 +37,32 @@ class ResData
     @headers[string] = value
 
   # rd()  Append the given value to the body of the outgoing response.
-  appendToResponseBody: (binary) -> 
+  appendToResponseBody: (body) -> 
+    @body = "" if @body == null
+    @body += body
 
   # rd()  see respRedirect; this sets that value.
   doRedirect: (bool) -> @redirect = bool
 
-  # rd()  The dispPath is the only path that can be changed during a request. This function will do so.
+  # rd()  The dispPath is the only path that can be changed during a request.
+  # This function will do so.
   setDispPath: (string) ->
 
   # rd() Replace the incoming request body with this for the rest of the processing.
   setReqBody: (binary) ->
 
   # rd()  Set the outgoing response body to this value.
-  setRespBody: (binary) ->
+  setRespBody: (body) -> @body = body
 
-  # rd()  Use this streamed body to produce the outgoing response body on demand.
-  setRespBody: (streambody) ->
+  # # rd()  Use this streamed body to produce the outgoing response body on demand.
+  # setRespBody: (streambody) ->
 
   # rd()  Given a list of two-tuples of {headername,value}, set those outgoing response headers.
   setRespHeaders: (headername, value) -> 
+    @headers[headername] = value
 
   # rd() Remove the named outgoing response header.
   removeRespHeader: (string) ->
+    delete @headers[headername]
 
 module.exports = ResData
