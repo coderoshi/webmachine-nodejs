@@ -2,7 +2,6 @@ var vows    = require('vows'),
     assert  = require('assert'),
     net     = require('net'),
     http    = require('http'),
-    iced    = require('iced-coffee-script'),
     ResData = require('../lib/responseData');
 
 vows.describe('Server').addBatch({

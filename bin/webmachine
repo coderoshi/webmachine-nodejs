@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var log = console.log,
-    coffee = require('iced-coffee-script'),
     argv = require('optimist').argv,
     webmachine = require('../lib/webmachine');
 

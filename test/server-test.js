@@ -2,7 +2,6 @@ var vows   = require('vows'),
     assert = require('assert'),
     net    = require('net'),
     http   = require('http'),
-    iced   = require('iced-coffee-script'),
     wm     = require('../lib/webmachine');
 
 var port = 9000;
