@@ -14,6 +14,8 @@ vows.describe('Server').addBatch({
       resData.setRespHeader('Location', '/tmp');
       resData.setRespBody('data');
       resData.doRedirect(true);
+      resData.setDispPath('/tmp');
+      resData.setReqBody(true);
       this.callback(undefined, resData);
     },
     'and fields exist': function (err, resData) {
@@ -31,6 +33,12 @@ vows.describe('Server').addBatch({
     },
     'and respRedirect': function (err, resData) {
       assert.equal(resData.respRedirect(), true);
+    },
+    'and dispPath': function (err, resData) {
+      assert.equal(resData.dispPath, '/tmp');
+    },
+    'and reqBody': function (err, resData) {
+      assert.equal(resData.reqBody, true);
     },
     'and statusCode': function (err, resData) {
       assert.equal(resData.statusCode(), 200);

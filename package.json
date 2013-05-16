@@ -2,7 +2,7 @@
   "author": "Eric Redmond <eric.redmond@gmail.com>",
   "name": "webmachine",
   "description": "Webmachine Application Server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "preferGlobal": "true",
   "repository": {
     "type": "git",
