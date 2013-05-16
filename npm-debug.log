@@ -1,0 +1,29 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'test', 'test/charset-test.js' ]
+2 info using npm@1.1.39
+3 info using node@v0.8.1
+4 verbose node symlink /usr/local/bin/node
+5 verbose config file /Users/ericredmond/.npmrc
+6 verbose config file /usr/local/etc/npmrc
+7 verbose config file /usr/local/lib/node_modules/npm/npmrc
+8 verbose read json /Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json
+9 error Error: ENOENT, open '/Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json'
+9 error  { [Error: ENOENT, open '/Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json']
+9 error   errno: 34,
+9 error   code: 'ENOENT',
+9 error   path: '/Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json' }
+10 error You may report this log at:
+10 error     <http://github.com/isaacs/npm/issues>
+10 error or email it to:
+10 error     <npm-@googlegroups.com>
+11 error System Darwin 12.3.0
+12 error command "node" "/usr/local/bin/npm" "test" "test/charset-test.js"
+13 error cwd /Users/ericredmond/Code/webmachine-nodejs
+14 error node -v v0.8.1
+15 error npm -v 1.1.39
+16 error path /Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json
+17 error code ENOENT
+18 error message ENOENT, open '/Users/ericredmond/Code/webmachine-nodejs/node_modules/test/charset-test.js/package.json'
+19 error errno 34
+20 error 34 errno
+21 verbose exit [ 34, true ]

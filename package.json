@@ -2,7 +2,7 @@
   "author": "Eric Redmond <eric.redmond@gmail.com>",
   "name": "webmachine",
   "description": "Webmachine Application Server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "preferGlobal": "true",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "license" : "MIT/X11",
   "main": "./lib/webmachine.js",
   "engines": {
-    "node": "~>0.6.0"
+    "node": "=>0.8.0"
   },
   "dependencies": {
     "optimist"        : "~>0.2.0",
