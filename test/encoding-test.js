@@ -13,7 +13,7 @@ vows.describe('FSM Encoding').addBatch({
       var resource = new Resource(root);
       var fsm = new Fsm(resource);
       var identityFunc = function(x){ return x; };
-      var provided = {"deflate":identityFunc,"identity":identityFunc};
+      var provided = {"identity":identityFunc};
       var acceptencoding = '*';
       var encoding = fsm.doChooseEncoding(provided, acceptencoding);
       this.callback(true, encoding);
