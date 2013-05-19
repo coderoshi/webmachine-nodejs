@@ -69,8 +69,8 @@ vows.describe('FSM Encoding').addBatch({
       var encoding = fsm.doChooseEncoding(provided, acceptencoding);
       this.callback(true, encoding);
     },
-    'choose identity': function (passed, charset) {
-      assert.equal(charset, 'identity');
+    'choose null': function (passed, charset) {
+      assert.equal(charset, null);
     }
   }
   // check that * works against a lower q match
