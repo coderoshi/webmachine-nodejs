@@ -9,7 +9,7 @@ The easiest way to get started is to include `webmachine` npm project into `pack
 ```json
 {
   "name": "wmtest",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "webmachine" : "~>0.0.3"
   }
